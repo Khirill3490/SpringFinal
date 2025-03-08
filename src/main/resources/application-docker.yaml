@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    initialization-mode: always
+    url: jdbc:postgresql://localhost:5432/app_db
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/appdatabase
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: statistic_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+
+  app:
+    userRegTopic: user-registration
+    roomBookingTopic: room-booking
+    groupId: statistic_group"
+
+    exportPath: data/export
+    fileName: statistic.csv
+
+    photosPath: data/photos
+
